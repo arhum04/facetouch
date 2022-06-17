@@ -47,4 +47,4 @@ If you want to run any of the demos locally, follow these steps:
 
 5. Run the demo. `yarn watch`
 
-6. The demo runs at `localhost:1234`. (Remember to provide URL model parameter e. g. `localhost:1234/?model=movenet`)
+6. The demo runs at `localhost:1234`. (Remember to provide URL model parameter e. g. `localhost:1234/?model=posenet`)

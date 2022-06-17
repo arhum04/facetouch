@@ -37,6 +37,10 @@ let startInferenceTime, numInferences = 0;
 let inferenceTimeSum = 0, lastPanelUpdate = 0;
 let rafId;
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 async function createDetector() {
   switch (STATE.model) {
     case posedetection.SupportedModels.PoseNet:
@@ -166,6 +170,38 @@ async function renderResult() {
   }
 
   camera.drawCtx();
+    
+    
+    let nose = poses[0].keypoints[0]
+    let leftEar = poses[0].keypoints[3]
+    let rightEar = poses[0].keypoints[4]
+    
+    let leftWrist = poses[0].keypoints[9]
+    let rightWrist = poses[0].keypoints[10]
+    
+    
+    let faceWidth = Math.abs(rightEar.x - leftEar.x)
+    
+    let topHeadY = nose.y + (faceWidth/2)
+    let topHeadX = nose.x
+    
+    let topHead = { x: topHeadX, y: topHeadY }
+    
+    let bottomHeadY = nose.y - (faceWidth/2)
+    let bottomHeadX = nose.x
+    
+    let bottomHead = { x: bottomHeadX, y: bottomHeadY}
+    
+    if(getRandomInt(100) < 5) {
+//        console.log(poses)
+        //console.log("faceWidth: ", faceWidth)
+        //console.log("topHead: ", topHead)
+        //console.log("bottomHead: ", bottomHead)
+    }
+    
+    if (leftWrist.x <= leftEar.x && leftWrist.x >= rightEar.x && leftWrist.y <= topHead.y && leftWrist.y >= bottomHead.y){
+        console.log("touching face") 
+    }
 
   // The null check makes sure the UI is not in the middle of changing to a
   // different model. If during model change, the result is from an old model,
